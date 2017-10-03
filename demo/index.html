@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+<title>owLazyLoad - Pure JS async content loader</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1; IE=8" />
+<meta name="title" content="owLazyLoad - Pure JS async content loader" />
+<meta name="description" content="Lazyload images, iframes, videos and even background images for the desired DOM elements." />
+<meta name="keywords" content="lazyload, js lazyload, pure js lazyload" />
+<meta name="author" content="Olabaworks" />
+<meta name="robots" content="all" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<style>
+		body {
+			background: #222;
+			font-family: 'Arial';
+			font-size: 16px;			
+			padding: 15px 0;
+		}
+
+		footer {
+			background: #888844;
+			color: white;			
+			margin: 30px -20px 15px;	
+			padding: 15px 0;
+			text-align: center;		
+		}
+
+		h4 {
+			font-size: 24px;	
+			font-weight: normal;
+		}
+
+		h4 small {
+			color: #999;
+			display: block;
+			font-size: 16px;
+			line-height: 120%;
+			margin-top: 5px;
+		}
+
+		p {
+			font-size: initial;
+			line-height: 150%;
+			margin-bottom: 10px;
+		}
+
+		pre {
+			background: #444;
+			color: white;
+			font-size: 13px;
+			margin: 0 0 20px;
+			padding: 15px;
+			white-space: normal;
+		}
+
+		img {			
+			height: auto;			
+			width: auto;
+		}
+
+		img,
+		iframe,
+		video {
+			border: 0;
+			display: block;			
+			margin-bottom: 20px;
+			max-width: 100%;
+			width: 100%;
+		}
+
+		.container {
+			background: white;
+			margin: auto;
+			max-width: 1024px;
+			padding: 0 20px 20px;
+		}
+		.page-header {
+			background: #888844;
+			color: white;
+			margin: 0 -20px 20px;
+			padding: 20px;
+		}
+		.page-header h1 {						
+			font-size: 48px;
+			margin: 0 0 20px;			
+		}
+
+		.page-header p {
+			font-size: 20px;
+		}
+		.block {
+			font-size: 0;
+		}
+		.column {
+			box-sizing: border-box;
+			display: inline-block;
+			vertical-align: top;
+			width: 50%;			
+		}
+		.column--first {
+			padding-right: 15px;
+		}
+
+		@media (max-width:767px) {
+			.column {
+				display: block !important;
+				width: 100%;
+			}
+			.column--first {
+				padding: 0;
+			}
+		}
+	</style>
+
+	<div class="container">
+
+		<div class="page-header">
+			<h1>owLazyLoad</h1>
+			<p class="lead">
+			Lazyload images, iframes, videos and even background images for the
+			desired DOM elements.
+			</p>
+		</div>
+
+		<div class="block">
+			<h4>
+				Why this?
+			</h4>
+			<p>
+				Lazyloading content has no mistery and there are lots of libraries that get the job done, but I just wanted to keep it simple, light and pure.<br>
+				I use vanilla Javascript and the minified version size is only <b>703 bytes</b>.<br>
+				However, there is no scroll/viewport checking or any other feature rather than loading your desired content at x millisecs after the DOM is ready. The code is easy to read and understand and you should have no problems to extend it to fit your particular needs.
+			</p>
+		</div>
+
+		<div class="block">
+			<h4>
+				Get started
+				<small>
+				Just include the JS in your project.<br>
+				No need to initialise it, but if you need to, for example to get it initialised after an Ajax request, use:
+				</small>
+			</h4>
+			<pre>owLazyLoad();</pre>
+		</div>
+
+		<div class="block">
+			<h4>
+				With Images
+				<small>
+				Use the attribute <b>ow-lazyload-src</b> with the path to the
+				image.
+				</small>
+			</h4>
+			<div class="column column--first">
+				<img src="" ow-lazyload-src="photo-1489069313310-63735a4f3010.jpeg" height="320" />
+			</div>
+			<div class="column">
+				<pre>&lt;img src="loading.gif" <b>ow-lazyload-src</b>="photo-1489069313310-63735a4f3010.jpeg" height="320" /&gt;</pre>
+			</div>
+		</div>
+
+		<div class="block">
+			<h4>
+				With Background images
+				<small>
+				With DIV,SECTION,SPAN or other nodes with no 'src' attribute, the image
+				will be loaded as a background-image.<br>Again, use the attribute
+				<b>ow-lazyload-src</b> with the path to the image.
+				</small>
+			</h4>
+				
+			<div class="column column--first">
+				<div ow-lazyload-src="photo-1489069313310-63735a4f3010.jpeg" style="width:100%;height:400px;background-size:cover;background-repeat:no-repeat;"></div>
+			</div>
+			<div class="column">
+				<pre>&lt;div <b>ow-lazyload-src</b>="photo-1489069313310-63735a4f3010.jpeg" style="width:100%;height:400px;background-size:cover;background-repeat:no-repeat;"&gt;&lt;/div&gt;</pre>
+			</div>			
+		</div>
+			
+		<div class="block">	
+			<h4>
+				With Audio/Iframes/Videos
+				<small>
+				Use the attribute <b>ow-lazyload-src</b> with the path to the
+				desired content.
+				</small>
+			</h4>
+
+			<div class="column column--first">
+				<pre>&lt;video controls <b>ow-lazyload-src</b>="https://www.w3schools.com/html/mov_bbb.mp4" width="100%" height="400"&gt;&lt;/iframe&gt;</pre>
+				<video controls ow-lazyload-src="https://www.w3schools.com/html/mov_bbb.mp4" width="100%"></video>
+			</div>
+			<div class="column">
+				<pre>&lt;iframe <b>ow-lazyload-src</b>="https://www.olabaworks.com" width="100%" height="400"&gt;&lt;/iframe&gt;</pre>
+				<iframe ow-lazyload-src="https://www.olabaworks.com" width="100%" height="400"></iframe>				
+			</div>					
+		</div>
+
+		<div class="block">
+			<h4>
+				All the examples together
+			</h4>
+
+			<pre>&lt;img <b>ow-lazyload-src</b>="photo-1489069313310-63735a4f3010.jpeg" height="320" /&gt;</pre>
+			<pre>&lt;div <b>ow-lazyload-src</b>="photo-1489069313310-63735a4f3010.jpeg" style="width:100%;height:400px;background-size:cover;background-repeat:no-repeat;"&gt;&lt;/div&gt;</pre>
+			<pre>&lt;iframe <b>ow-lazyload-src</b>="https://www.olabaworks.com" width="100%" height="400"&gt;&lt;/iframe&gt;</pre>
+			<pre>&lt;video controls <b>ow-lazyload-src</b>="https://www.w3schools.com/html/mov_bbb.mp4" width="100%" height="400"&gt;&lt;/iframe&gt;</pre>
+		</div>
+
+		<div class="block">
+			<p>
+				Image credits go to @eaterscollective at unsplash.com<br>
+				Video credits go to https://www.bigbuckbunny.org/
+			</p>
+		</div>
+
+		<footer>
+			&copy; 2017 - Olabaworks
+		</footer>
+	
+	</div>	
+		
+	<script type="text/javascript" src="../owLazyLoad.min.js"></script>
+
+	</body>
+
+</html>
